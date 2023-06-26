@@ -29,18 +29,18 @@ jobs:
       run: docker-compose up -d
 
     - name: Test
+      env:
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_USER: root
+        DB_PASSWORD: root
+        DB_NAME: root
       run: go test -v main_test.go 
       
   
   build:
     needs: test
     runs-on: ${{ matrix.os }}
-    env:
-      DB_HOST: localhost
-      DB_PORT: 5432
-      DB_USER: root
-      DB_PASSWORD: root
-      DB_NAME: root
     strategy:
       matrix:
         os: ['ubuntu-latest', 'ubuntu-18.04']
